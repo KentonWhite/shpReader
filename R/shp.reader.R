@@ -21,8 +21,6 @@
 #' \dontrun{es.reader('example.es', 'data/example.es', 'example')}
 shp.reader <- function(data.file, filename, variable.name)
 {
-  .require.package('rgdal')
-  
   dn <- dirname(filename)
   bn <- sub('\\.shp$', '', basename(filename))
   
@@ -31,8 +29,8 @@ shp.reader <- function(data.file, filename, variable.name)
   }
   
   tryCatch(assign(variable.name,
-                  readOGR(dsn = dn, layer = bn),
-                  envir = .TargetEnv),
+                  rgdal::readOGR(dsn = dn, layer = bn),
+                  envir = .GlobalEnv),
            error = ef)
   
 }
