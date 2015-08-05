@@ -6,3 +6,13 @@
 
 This is a design problem in `.load.data()`. It is assumed implicitly that each recognized file corresponds to one object.
 While in the case of shapefiles this is not the case.
+
+**Workaround:**
+Include the following code in a file under `/lib`.
+It will prevent loading any other *true* `.dbf` file.
+```R
+## Remove .dbf extension from list of recognized extensions
+## to avoid conflict with .dbf files of shapefiles
+ptns <- getNamespace('ProjectTemplate')
+rm('\\.dbf$', envir = get('extensions.dispatch.table', envir = ptns))
+```
