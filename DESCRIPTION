@@ -1,0 +1,20 @@
+Package: shpReader
+Type: Package
+Title: Provides a shapefile Reader for ProjectTemplate
+Version: 1.0
+Date: 2015-08-04
+Encoding: UTF-8
+Author: Facundo Muñoz
+Maintainer: Facundo Muñoz <facundo.munoz@orleans.inra.fr>
+Description: Creates a shapefile Reader for ProjectTemplate. Install and 
+  include shpReader as a required package. 
+  Reads from a *.shp file in the data folder.
+License: GPL-3
+Depends:
+    R (>= 2.14),
+    ProjectTemplate,
+    sp
+Imports:
+    rgdal
+Suggests:
+
