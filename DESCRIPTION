@@ -10,11 +10,12 @@ Description: Creates a shapefile Reader for ProjectTemplate. Install and
   include shpReader as a required package. 
   Reads from a *.shp file in the data folder.
 License: GPL-3
-Depends:
+Depends: 
     R (>= 2.14),
     ProjectTemplate,
     sp
-Imports:
+Imports: 
     rgdal
 Suggests:
-
+    testthat,
+    foreign
