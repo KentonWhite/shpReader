@@ -1,7 +1,7 @@
 Package: shpReader
 Type: Package
 Title: Provides a shapefile Reader for ProjectTemplate
-Version: 1.0
+Version: 1.1
 Date: 2015-08-04
 Encoding: UTF-8
 Author: Facundo Muñoz

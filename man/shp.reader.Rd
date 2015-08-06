@@ -17,14 +17,11 @@ shp.reader(data.file, filename, variable.name)
 No value is returned; this function is called for its side effects.
 }
 \description{
-This function will load data from an ElasticSearch index based on configuration
-information found in the specified .es file. The .es file must specify
-an ElasticSearch sercer to be accessed. A specific query against any index may be executed to generate
-a data set.
+This function will load data from an ESRI shapefile
 }
 \examples{
 library('ProjectTemplate')
 
-\dontrun{es.reader('example.es', 'data/example.es', 'example')}
+\dontrun{shp.reader('example.shp', 'data/example.shp', 'example')}
 }
 

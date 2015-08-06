@@ -1,10 +1,6 @@
 #' Read a shapefile described in a .shp file.
 #'
-#' This function will load data from an ElasticSearch index based on configuration
-#' information found in the specified .es file. The .es file must specify
-#' an ElasticSearch sercer to be accessed. A specific query against any index may be executed to generate
-#' a data set.
-#'
+#' This function will load data from an ESRI shapefile
 #'
 #' @param data.file The name of the data file to be read.
 #' @param filename The path to the data set to be loaded.
@@ -18,7 +14,7 @@
 #' @examples
 #' library('ProjectTemplate')
 #'
-#' \dontrun{es.reader('example.es', 'data/example.es', 'example')}
+#' \dontrun{shp.reader('example.shp', 'data/example.shp', 'example')}
 shp.reader <- function(data.file, filename, variable.name)
 {
   dn <- dirname(filename)
@@ -35,10 +31,37 @@ shp.reader <- function(data.file, filename, variable.name)
   
 }
 
+#' Overriden dbf reader
+#' 
+#' This alternative reader avoids loading shapefiles' dbf companion files as if
+#' they were XBASE files
+#' 
+#' @param data.file The name of the data file to be read.
+#' @param filename The path to the data set to be loaded.
+#' @param variable.name The name to be assigned to in the global environment.
+dbf.reader <- function(data.file, filename, variable.name)
+{
+  bn <- sub('\\.dbf$', '', basename(filename))
+  
+  ## Only call the original dbf reader if there is no .shp file
+  ## with the same basename
+  if (!file.exists(sub('\\.dbf', '\\.shp', filename))) {
+    .TargetEnv <- .GlobalEnv
+    do.call(ProjectTemplate:::dbf.reader, 
+            list(data.file, filename, variable.name))
+  }
+  
+  ## Otherwise don't do anything, and ProjectTemplate
+  ## will eventually process the .shp extension
+}
+
+
 #' @import ProjectTemplate
 .onLoad <- function(...)
 {
+  ## Register new and overriden readers
 	.add.extension('shp', shp.reader)
+	.add.extension('dbf', dbf.reader)
 }
 
 
