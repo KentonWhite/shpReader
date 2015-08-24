@@ -26,7 +26,7 @@ shp.reader <- function(data.file, filename, variable.name)
   
   tryCatch(assign(variable.name,
                   rgdal::readOGR(dsn = dn, layer = bn),
-                  envir = .GlobalEnv),
+                  envir = .TargetEnv),
            error = ef)
   
 }
@@ -46,7 +46,6 @@ dbf.reader <- function(data.file, filename, variable.name)
   ## Only call the original dbf reader if there is no .shp file
   ## with the same basename
   if (!file.exists(sub('\\.dbf', '\\.shp', filename))) {
-    .TargetEnv <- .GlobalEnv
     do.call(ProjectTemplate:::dbf.reader, 
             list(data.file, filename, variable.name))
   }
@@ -65,4 +64,6 @@ dbf.reader <- function(data.file, filename, variable.name)
 }
 
 
+# A temporary workaround to avoid writing directly to .GlobalEnv
+.TargetEnv <- .GlobalEnv
 
