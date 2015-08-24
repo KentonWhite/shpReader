@@ -14,7 +14,7 @@ test_that('Both shapefiles and dbf files are correctly read', {
     ## cleanup
     setwd(wd)
     unlink('testproject', recursive = TRUE)
-    rm(writen.td, writen.tp)
+    rm(writen.td, writen.tp, envir = .GlobalEnv)
   })
   
   ## Write a dummy xls data file
@@ -22,7 +22,7 @@ test_that('Both shapefiles and dbf files are correctly read', {
   rgdal::writeOGR(tp, 'data', 'writen_tp', driver = 'ESRI Shapefile')
   
   ## Load project (and data)
-  sink()
+  sink('/dev/null')
   load.project()
   sink()
   
