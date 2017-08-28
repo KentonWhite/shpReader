@@ -59,8 +59,8 @@ dbf.reader <- function(data.file, filename, variable.name)
 .onLoad <- function(...)
 {
   ## Register new and overriden readers
-	.add.extension('shp', shp.reader)
-	.add.extension('dbf', dbf.reader)
+	.add.extension('shp', 'shp.reader')
+	.add.extension('dbf', 'dbf.reader')
 }
 
 
